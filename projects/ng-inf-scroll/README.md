@@ -4,8 +4,6 @@
   <img src="logo.png" alt="ng-inf-scroll logo" width="200" />
 </p>
 
-<p style="text-align: center; font-style: italic; margin-top: 5px;">Infinite scroll in your Angular App</p>
-
 `ng-inf-scroll` is lightweight, extremly performant &#128640; Angular library designed to seamlessly implement infinite scroll functionality in your Angular applications.
 
 # Installation
