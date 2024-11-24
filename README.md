@@ -1,27 +1,37 @@
-# ng-inf-scroll
+# Adding Infinite Scroll in Angular with ng-inf-scroll
 
-<p align="center">
-  <img src="logo.png" alt="ng-inf-scroll logo" width="200" />
-</p>
+`ng-inf-scroll` is a lightweight, extremely performant 🚀 Angular library designed to seamlessly implement infinite scroll functionality in your Angular applications. In this blog post, I'll walk you through how to integrate infinite scrolling into your Angular applications using `ng-inf-scroll`.
 
-`ng-inf-scroll` is lightweight, extremly performant &#128640; Angular library designed to seamlessly implement infinite scroll functionality in your Angular applications.
+## What is ng-inf-scroll?
 
-# Installation
+`ng-inf-scroll` is a lightweight, extremely performant Angular library designed to seamlessly add infinite scroll functionality to your Angular applications. With easy-to-use services and directives, you can use `ng-inf-scroll` on both the window (root element) and any container element within your application.
 
-`npm install ng-inf-scroll`
+### Installation
 
-# Usage
+To get started, install `ng-inf-scroll` using npm:
 
-There are two ways to use `ng-inf-scroll` library.
-
-- use on window
-- use on container element
-
-## On Window
-
-In order to use infinite scroll on `Window` ( root element ) inject `ViewportInfScroller` service in your component and listen to the `scrolled` observable
-
+```sh
+npm install ng-inf-scroll
 ```
+
+### Usage
+
+There are two main ways to use the `ng-inf-scroll` library:
+
+1. Infinite Scroll on the window (root element)
+2. Infinite Scroll on a container element
+
+Let's dive into both approaches.
+
+### 1. Infinite Scroll on the Window (Root Element)
+
+If you want infinite scroll to work on the entire window, inject the `ViewportInfScroll` service into your component and listen to the `scrolled` observable.
+
+```typescript
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ViewportInfScroll } from 'ng-inf-scroll';
+
 @Component({
   selector: 'some-page',
   template: ' <p> Page content </p> ',
@@ -46,112 +56,62 @@ export class SomePageComponent implements OnInit, OnDestroy {
 }
 ```
 
-dont't forget to unsubscribe the observable on `ngOnDestroy` callback to cleanup listener.
+Don't forget to unsubscribe from the observable in the `ngOnDestroy` callback to clean up the listener.
 
-## On Container element
+### 2. Infinite Scroll on a Container Element
 
-if you have some container element and you want to attach infinite-scroll on in, use `infScroll` directive
+If you have a specific container element where you want to add infinite scroll, you can use the `infScroll` directive. This is useful when scrolling should be limited to a particular section of the page.
 
-```
+Here's an example:
+
+```typescript
+import { Component } from '@angular/core';
+import { InfScroll } from 'ng-inf-scroll';
+
 @Component({
   selector: 'some-page',
   styles: [
     `
       .container {
-        height: '200px';
-        overflow-y:auto;
+        height: 200px;
+        overflow-y: auto;
       }
     `,
   ],
   template: `
     <div class="container" infScroll (scrolled)="loadMore()">
-      @for (item of data; track $index) {
-      <h1>{{ item }}</h1>
-      }
+      <h1 *ngFor="let item of data; trackBy: trackByFn">{{ item }}</h1>
     </div>
   `,
   standalone: true,
   imports: [InfScroll],
 })
 export class SomePageComponent {
-  data = new Array(100).fill(() => Math.random()); // Random numbers length:100
+  data = new Array(100).fill(0).map(() => Math.random());
 
   loadMore() {
-    // Load data
+    // Load more data logic here
+  }
+
+  trackByFn(index: number) {
+    return index;
   }
 }
 ```
 
-# Options
+### Options
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        Property name
-      </th>
-      <th>
-        type
-      </th>
-      <th>
-        Default
-      </th>
-      <th>
-        Description
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        orientation
-      </td>
-      <td>
-        'x' | 'y'
-      </td>
-      <td>
-        'y'
-      </td>
-      <td>
-        scroll orientation, y is vertical, x is horizontal
-      </td>
-    </tr>
-    <tr>
-      <td>
-        autoStop
-      </td>
-      <td>
-        boolean
-      </td>
-      <td>
-        true
-      </td>
-      <td>
-      When this value is set to true, the scrolled event will not emit if the container's height remains unchanged after the last emission. For instance, if the scrolled event is triggered, and you fetch data from the server but the response is empty, the container's height will stay the same. This indicates that you've reached the end of the infinite scroll.
-      </td>
-    </tr>
-    <tr>
-      <td>
-       offsetPercentage
-      </td>
-      <td>
-        number
-      </td>
-      <td>
-        20
-      </td>
-      <td>
-     This value determines when to emit the <code>scrolled</code> event, based on a percentage calculated from the container's  <code>scrollHeight</code> or <code>scrollWidth</code>. For example, initially, your container's scroll height might be <code>300px</code>. As you load more data through infinite scrolling, the scroll height increases to <code>1000px</code>. This setting ensures the scrolled event is emitted consistently at the same relative scroll position, regardless of the container's changing height.
-      </td>
-    </tr>
-  </tbody>
-</table>
+`ng-inf-scroll` comes with configurable options that help customize the infinite scroll behavior. Here are the available properties:
 
-# Overide default options
+- **orientation**: (`'x' | 'y'`) - The default is `'y'`, which means vertical scrolling. Use `'x'` for horizontal scrolling.
+- **autoStop**: (`boolean`) - Default is `true`. If set to `true`, the `scrolled` event will not emit if the container's height remains unchanged after the last emission. For instance, if the scrolled event is triggered, and you fetch data from the server but the response is empty, the container's height will stay the same. This indicates that you've reached the end of the infinite scroll.
+- **offsetPercentage**: (`number`) - Default is `20`. It defines when the `scrolled` event should be emitted, based on the percentage of the container's scroll height. For example, initially, your container's scroll height might be 300px. As you load more data through infinite scrolling, the scroll height increases to 1000px. This setting ensures the scrolled event is emitted consistently at the same relative scroll position, regardless of the container's changing height.
 
-To override the default options, use the `provideInfScroll` function in `appConfig`.
+### Override Default Options
 
-```
+To override the default options globally, you can use the `provideInfScroller` function in the `appConfig`.
+
+```typescript
 import { ApplicationConfig } from '@angular/core';
 import { provideInfScroller } from 'ng-inf-scroll';
 
@@ -163,5 +123,6 @@ export const appConfig: ApplicationConfig = {
     }),
   ],
 };
-
 ```
+
+This allows you to modify how the infinite scroll behaves globally, ensuring it meets your application's specific requirements.
