@@ -149,7 +149,7 @@ export class SomePageComponent {
 
 # Overide default options
 
-To override the default options, use the provideInfScroll function in appConfig.
+To override the default options, use the `provideInfScroll` function in `appConfig`.
 
 ```
 import { ApplicationConfig } from '@angular/core';
