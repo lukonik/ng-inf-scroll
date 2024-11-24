@@ -1,0 +1,18 @@
+.scroll-container {
+  width: 300px; /* Set the visible width */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of child elements */
+  border: 1px solid #ccc;
+}
+
+.scroll-item {
+  display: inline-block;
+  width: 150px;
+  height: 100px;
+  margin: 5px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 5px;
+}

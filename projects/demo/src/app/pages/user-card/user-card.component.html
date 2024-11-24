@@ -1,0 +1,11 @@
+<div class="user-card">
+  <img [src]="user().avatar" alt="User Name" class="user-avatar" />
+  <div class="user-info">
+    <h2>{{ user().name }}</h2>
+    <p class="user-contact"><strong>Email:</strong> {{ user().email }}</p>
+    <p class="user-contact"><strong>Phone:</strong> {{ user().phone }}</p>
+    <p class="user-address">
+      <strong>Address:</strong> {{ user().address }}
+    </p>
+  </div>
+</div>

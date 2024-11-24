@@ -1,0 +1,6 @@
+.element-x {
+  width: 80vw; /* Set the visible width */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of child elements */
+  border: 1px solid #ccc;
+}
