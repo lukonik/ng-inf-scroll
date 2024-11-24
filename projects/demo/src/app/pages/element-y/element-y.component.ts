@@ -3,7 +3,7 @@ import { UserCardComponent } from '../user-card/user-card.component';
 import { DataService } from '../../data.service';
 import { UserModel } from '../../models';
 import { BasePage } from '../base-page';
-import { InfScroll } from '../../../../../ng-inf-scroll/src/public-api';
+import { InfScroll } from 'ng-inf-scroll'
 
 @Component({
   selector: 'app-element-y',

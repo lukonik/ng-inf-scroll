@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { InfScroll } from '../../../../../ng-inf-scroll/src/public-api';
+import { InfScroll } from 'ng-inf-scroll'
 import { UserCardComponent } from '../user-card/user-card.component';
 import { BasePage } from '../base-page';
 

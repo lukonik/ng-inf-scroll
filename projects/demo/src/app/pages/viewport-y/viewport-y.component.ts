@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BasePage } from '../base-page';
 import { Subscription } from 'rxjs';
-import { ViewportInfScroll } from '../../../../../ng-inf-scroll/src/public-api';
+import { ViewportInfScroll } from 'ng-inf-scroll'
 import { UserCardComponent } from '../user-card/user-card.component';
 
 @Component({

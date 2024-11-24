@@ -1,11 +1,14 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideInfScroller } from 'ng-inf-scroll';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideInfScroller({
-      autoStop: false,
-      offsetPercentage: 30,
-    }),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
   ],
 };

@@ -1,9 +1,13 @@
 {
-  "name": "@ng-verse/ng-inf-scroll",
+  "name": "ng-inf-scroll",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": ">=16.2.0",
     "@angular/core": ">=16.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukonik/ng-inf-scroll"
   },
   "dependencies": {
     "tslib": "^2.3.0"
