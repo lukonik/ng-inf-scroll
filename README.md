@@ -1,4 +1,7 @@
 # Adding Infinite Scroll in Angular with ng-inf-scroll
+<p align="center">
+  <img src="logo.png" alt="ng-inf-scroll logo" width="200" />
+</p>
 
 `ng-inf-scroll` is a lightweight, extremely performant 🚀 Angular library designed to seamlessly implement infinite scroll functionality in your Angular applications. In this blog post, I'll walk you through how to integrate infinite scrolling into your Angular applications using `ng-inf-scroll`.
 
