@@ -8,7 +8,6 @@ import { SCROLL_ORIENTATION, Scroller } from './scroller';
 import { INF_SCROLLER_OPTIONS } from './provide-inf-scroller';
 
 export interface ScrollerOptions {
-  offset?: number;
   offsetPercentage?: number;
   autoStop?: boolean;
   orientation?: SCROLL_ORIENTATION;
@@ -52,14 +51,12 @@ export class CreateScroller {
   ) {
     const orientation = this.getOptionValue(options, 'orientation');
     const autoStop = this.getOptionValue(options, 'autoStop');
-    const offset = this.getOptionValue(options, 'offset');
     const offsetPercentage = this.getOptionValue(options, 'offsetPercentage');
 
     const scroller = new Scroller(
       {
         scrollElement: options.scrollElement,
         checkingTo: options.checkingTo,
-        offset: offset,
         orientation: orientation,
         autoStop: autoStop,
         offsetPercentage: offsetPercentage,

@@ -1,8 +1,8 @@
-<div class="element-y" infScroll [offset]="100" (scrolled)="loadMore()">
+<div class="element-y" infScroll (scrolled)="loadMore()">
   @for (user of users(); track $index) {
   <app-user-card [user]="user"></app-user-card>
   }
 </div>
 @if(loading()){
-  <p class="loading">Loading...</p>
-  }
+<p class="loading">Loading...</p>
+}

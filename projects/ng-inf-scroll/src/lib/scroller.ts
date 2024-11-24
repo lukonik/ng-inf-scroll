@@ -20,33 +20,28 @@ export interface ScrollerRawOptions {
   scrollElement: HTMLElement | Window;
   checkingTo: HTMLElement;
   orientation: SCROLL_ORIENTATION;
-  offset?: number;
   autoStop: boolean;
-  offsetPercentage?: number;
+  offsetPercentage: number;
 }
 
 export class Scroller {
   constructor(protected options: ScrollerRawOptions, private zone: NgZone) {}
 
   private computeOffset() {
-    if (this.options.offsetPercentage) {
-      if (this.options.orientation === 'y') {
-        return Math.round(
-          (this.options.checkingTo.scrollHeight *
-            this.options.offsetPercentage) /
-            100
-        );
-      }
+    if (this.options.orientation === 'y') {
       return Math.round(
-        (this.options.checkingTo.scrollWidth * this.options.offsetPercentage) /
+        (this.options.checkingTo.scrollHeight * this.options.offsetPercentage) /
           100
       );
     }
-    return this.options.offset;
+    return Math.round(
+      (this.options.checkingTo.scrollWidth * this.options.offsetPercentage) /
+        100
+    );
   }
 
   private getScrollEndComputer() {
-    return this.options.orientation ==='y'
+    return this.options.orientation === 'y'
       ? () => isYScrolledToEnd(this.options.checkingTo, this.computeOffset())
       : () => isXScrolledToEnd(this.options.checkingTo, this.computeOffset());
   }

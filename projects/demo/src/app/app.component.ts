@@ -4,19 +4,21 @@ import {
   Component,
   ElementRef,
   inject,
+  OnDestroy,
   OnInit,
   signal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
-  InfScrollDirective,
+  InfScroll,
   ViewportInfScroll,
 } from '../../../ng-inf-scroll/src/public-api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, InfScrollDirective],
+  imports: [RouterOutlet, InfScroll],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

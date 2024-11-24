@@ -16,12 +16,11 @@ import { CreateScroller, ScrollerOptions } from './create-scroller';
   selector: '[infScroll]',
   standalone: true,
 })
-export class InfScrollDirective implements OnDestroy {
+export class InfScroll implements OnDestroy {
   el = inject<ElementRef<HTMLElement>>(ElementRef);
   createScroller = inject(CreateScroller);
   orientation = input<SCROLL_ORIENTATION>();
   autoStop = input<boolean>();
-  offset = input<number>();
   offsetPercentage = input<number>();
 
   private _scroller!: Scroller;
@@ -35,7 +34,6 @@ export class InfScrollDirective implements OnDestroy {
     effect(() => {
       this.cleanup();
       const options = {
-        offset: this.offset(),
         autoStop: this.autoStop(),
         orientation: this.orientation(),
         offsetPercentage: this.offsetPercentage(),

@@ -38,23 +38,19 @@ describe('CreateScroller', () => {
 
     const choseOption: ScrollerOptions = {
       autoStop: true,
-      offset: 10,
       offsetPercentage: 30,
       orientation: 'y',
     };
     correctlyReturnsDefinedOptionValue(choseOption, 'autoStop');
-    correctlyReturnsDefinedOptionValue(choseOption, 'offset');
     correctlyReturnsDefinedOptionValue(choseOption, 'offsetPercentage');
     correctlyReturnsDefinedOptionValue(choseOption, 'orientation');
 
     const defaultOption: ScrollerOptions = {
       autoStop: undefined,
-      offset: undefined,
       offsetPercentage: undefined,
       orientation: undefined,
     };
     correctlyReturnsDefaultOptionValue(defaultOption, 'autoStop', true);
-    correctlyReturnsDefaultOptionValue(defaultOption, 'offset', undefined);
     correctlyReturnsDefaultOptionValue(defaultOption, 'offsetPercentage', 20);
     correctlyReturnsDefaultOptionValue(defaultOption, 'orientation', 'y');
   });
@@ -73,7 +69,6 @@ describe('CreateScroller', () => {
     }
     const providedScroller = {
       autoStop: false,
-      offset: 100,
       offsetPercentage: 90,
       orientation: 'x',
     } as ScrollerOptions;
@@ -84,7 +79,6 @@ describe('CreateScroller', () => {
       service = TestBed.inject(CreateScroller);
     });
     correctlyReturnsProvidedOptionValue(providedScroller, 'autoStop', false);
-    correctlyReturnsProvidedOptionValue(providedScroller, 'offset', 100);
     correctlyReturnsProvidedOptionValue(
       providedScroller,
       'offsetPercentage',
@@ -93,57 +87,6 @@ describe('CreateScroller', () => {
     correctlyReturnsProvidedOptionValue(providedScroller, 'orientation', 'x');
   });
 
-  describe('getOptionValuePriority', () => {
-    it('priority1', () => {
-      const providedScroller = {
-        autoStop: false,
-        offset: 100,
-        offsetPercentage: 90,
-        orientation: 'x',
-      } as ScrollerOptions;
-      TestBed.configureTestingModule({
-        providers: [CreateScroller, provideInfScroller(providedScroller)],
-      });
-      service = TestBed.inject(CreateScroller);
-
-      const value = service.getOptionValue(
-        {
-          offset: 66,
-        },
-        'offset'
-      );
-      expect(value).toBe(66);
-    });
-
-    it('priority2', () => {
-      const providedScroller = {
-        autoStop: false,
-        offset: 99,
-        offsetPercentage: 90,
-        orientation: 'x',
-      } as ScrollerOptions;
-      TestBed.configureTestingModule({
-        providers: [CreateScroller, provideInfScroller(providedScroller)],
-      });
-      service = TestBed.inject(CreateScroller);
-
-      const value = service.getOptionValue({}, 'offset');
-      expect(value).toBe(99);
-    });
-    it('priority3', () => {
-      const providedScroller = {
-        autoStop: false,
-        orientation: 'x',
-      } as ScrollerOptions;
-      TestBed.configureTestingModule({
-        providers: [CreateScroller, provideInfScroller(providedScroller)],
-      });
-      service = TestBed.inject(CreateScroller);
-
-      const value = service.getOptionValue({}, 'offsetPercentage');
-      expect(value).toBe(20);
-    });
-  });
 
   describe('create', () => {
     TestBed.configureTestingModule({
@@ -157,7 +100,6 @@ describe('CreateScroller', () => {
         {
           scrollElement,
           checkingTo: checkToElement,
-          offset: 120,
           offsetPercentage: 20,
           autoStop: true,
         },
